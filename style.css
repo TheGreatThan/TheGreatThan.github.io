@@ -1,0 +1,282 @@
+body {
+  background: #182028 ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin: 0; 
+  cursor: none;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 9vmin;
+  color: rgb(136, 255, 203);
+  text-align: left;
+  font-family: Lato, sans-serif;
+  font-weight: 700;
+  margin: 1rem 0 1rem 2rem;
+}
+
+
+@keyframes typing {
+  0.0000%, 27.3488% {content: "" ; }
+  1.1395%, 26.2093% {content: "A"; }
+  2.2791%, 25.0698% {content: "A "; }
+  3.4186%, 23.9302% {content: "A H"; }
+  4.5581%, 22.27907% {content: "A Hu"; }
+  5.6977%, 21.6512% {content: "A Hum"; }
+  6.8372%, 20.5116% {content: "A Huma";}
+  7.9767%, 19.3721% {content:"A Human";}
+
+  30.7674%, 51.2791% {content: ""; }
+  31.9070%, 50.1395% {content: "A"; }
+  33.0465%, 49.0000% {content: "A "; }
+  34.1860%, 47.8605% {content: "A S"; }
+  35.3256%, 46.7209% {content: "A St"; }
+  36.4651%, 45.5814% {content: "A Stu"; }
+  37.6047%, 44.4419% {content: "A Stud"; }
+  38.7443%, 43.3024% {content: "A Stude"; }
+  39.8839%, 42.1629% {content: "A Studen";}
+  41.0235%, 41.0233% {content: "A Student";}
+
+  54.6977%, 75.2093% {content: ""; }
+  55.8327%, 74.0698% { content: "A"; }
+  56.9767%, 72.9302% {content: "A "; }
+  58.1163%, 71.7007% {content: "A R"; }
+  59.2558%, 70.6512% {content: "A Re"; }
+  60.3953%, 69.5116% {content: "A Rea"; }
+  61.5349%, 68.3721% {content: "A Read"; }
+  62.6745%, 67.2326% {content: "A Reade"; }
+  63.8141%, 66.0931% {content: "A Reader"; }
+
+  78.6279%, 96.8605% {content: ""; }
+  79.7674%, 95.7209% {content: "T"; }
+  80.9071%, 94.5814% {content: "Th"; }
+  82.0465%, 93.4419% {content: "Tha"; }
+  83.1860%, 92.3023% {content: "Than"; }
+  84.3256%, 91.1628% {content: "Than!"; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% {opacity: 0;}
+  
+}
+
+.typewriter {
+  --caret: currentcolor;
+}
+
+.typewriter::before {
+  content: "";
+  animation: typing 13.5s infinite;
+}
+
+.typewriter::after {
+  content: "";
+  border-right: 1px solid var(--caret);
+  animation: blink 0.5s linear infinite;
+}
+
+.typewriter.thick::after {
+  border-right: 1ch solid var(--caret);
+}
+
+.typewriter.nocaret::after {
+  border-right: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .typewriter::after{
+      animation: none;
+  }
+
+  @keyframes sequencePopup {
+      0%, 100% { content: "human";}
+      25% {content: "student"; }
+      50% {content: "reader"}
+      75% {content: "Than!";}
+  }
+  .typewriter::before {
+      content: "human";
+      animation: sequencePopup 12s linear infinite;
+      
+  }
+}
+
+
+/*test*/
+main {
+  padding: 50px;
+}
+nav {
+display: block;
+position: fixed;
+background-color: #044367a0;
+width: 220px;
+top: 0;
+left: -300px;
+bottom: 0;
+transition: all 0.5s;
+z-index: 3;
+opacity: 0;
+border-bottom-right-radius: 18px;
+border-top-right-radius: 18px;
+
+}
+
+.open nav {
+left: 0;
+opacity: 1;
+}
+
+nav .inner {
+padding: 25px;
+}
+
+nav .inner ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+nav .inner ul p {
+font-size: 10px;
+color: #fff;
+text-align: center;
+font-family: Barlow, sans-serif;
+position: fixed;
+bottom: 1px;
+left: -300px;
+transition: all 0.5s;
+opacity: 0;
+}
+
+.open nav .inner ul p {
+left: 60px;
+opacity: 1;
+}
+
+nav .inner ul li {
+margin: 0;
+border-bottom: 1px solid #ffffff;
+}
+
+nav .inner ul li a {
+display: block;
+color: #fffcfc;
+font-size: 14px;
+font-family: Barlow,sans-serif;
+font-weight: 700;
+padding: 1rem;
+text-decoration: none;
+transition-duration: 0.2s;
+}
+
+nav .inner ul li a:hover {
+background: #e4e4e4;
+color: #000;
+border-radius: 8px;
+}
+
+.toggle-btn {
+display: block;
+position: fixed;
+top: 30px;
+right: 30px;
+width: 30px;
+height: 30px;
+z-index: 3;
+}
+
+.toggle-btn span {
+position: absolute;
+display: block;
+left: 0;
+width: 30px;
+height: 2px;
+background-color: #8bf;
+transition: all 0.5s;
+border-radius: 4px;
+}
+
+.toggle-btn span:nth-child(1) {
+top: 4px;
+}
+.toggle-btn span:nth-child(2) {
+top: 14px;
+}
+.toggle-btn span:nth-child(3) {
+bottom: 4px;
+}
+
+.open .toggle-btn span {
+background-color: #8bf;
+}
+
+.open .toggle-btn span:nth-child(1) {
+transform: translateY(10px) rotate(-315deg);
+}
+
+.open .toggle-btn span:nth-child(2) {
+opacity: 0;
+}
+
+.open .toggle-btn span:nth-child(3) {
+transform: translateY(-10px) rotate(315deg);
+}
+
+#mask {
+display: none;
+transition: all 0.5s;
+}
+
+.open #mask {
+display: block;
+background: #000;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+position: fixed;
+opacity: 0.8;
+z-index: 2;
+}
+
+.page-down {
+padding-top: -100px;
+background-color: none;
+margin-bottom: 1.5rem;
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-gap: 1.5rem;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 20px;
+}
+
+.page-down {
+padding-top: 30px;
+background-color: transparent;
+padding-bottom: -250px;
+padding-left: -150px
+}
+
+#cursor {
+width: 10px;
+height: 10px;
+background-color: #00FFBF;
+border-radius: 50%;
+position: absolute;
+pointer-events: none;
+transition: width 0.2s, height 0.2s;
+z-index: 1000;
+transform: translate(-50%, -50%);
+}
+
+#cursor.interacting {
+width: 30px;
+height: 30px;
+border: 2px solid #00FFBF;
+background-color: transparent;
+}
