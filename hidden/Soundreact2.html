@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sound Reactive Line with Playlist</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #182028;
+            overflow: hidden;
+            cursor: none;
+        }
+        canvas {
+            display: block;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        #playlist {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #playlist li {
+            cursor: none;
+        }
+
+        #cursor {
+        width: 10px;
+        height: 10px;
+        background-color: #00FFBF;
+        border-radius: 50%;
+        position: absolute;
+        pointer-events: none;
+        transition: width 0.2s, height 0.2s;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+        }
+
+        #cursor.interacting {
+        width: 30px;
+        height: 30px;
+        border: 2px solid #00FFBF;
+        background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="controls">
+        <input type="file" id="audioInput" accept="audio/*" multiple style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: aqua; cursor: none;">
+        <button id="playPauseButton" style="cursor: none" class="interactable">Pause</button>
+        <button id="deleteButton" style="cursor: none" class="interactable">Delete</button>
+    </div>
+    <ul id="playlist"></ul>
+    <div style="padding: 5%; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: aqua;">
+        <h1 style="font-size: 15px;">Click to the background to add the sound you wanted to play</h1>
+        <p>Congrats! You Found Another Secret page!</p>
+    </div>
+    <script>
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var audioContext = new AudioContext();
+        var analyser = audioContext.createAnalyser();
+        var canvas = document.getElementById('canvas');
+        var canvasContext = canvas.getContext('2d');
+        var audioInput = document.getElementById('audioInput');
+        var playPauseButton = document.getElementById('playPauseButton');
+        var deleteButton = document.getElementById('deleteButton');
+        var playlist = document.getElementById('playlist');
+        var source;
+        var isPlaying = true;
+        var files = [];
+        var currentFileIndex = 0;
+        
+        function playFile(file) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                audioContext.decodeAudioData(reader.result, function(buffer) {
+                    if (source) {
+                        source.stop();
+                        source.disconnect();
+                    }
+                    source = audioContext.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                    source.start(0);
+                    source.onended = function() {
+                        currentFileIndex++;
+                        if (currentFileIndex >= files.length) {
+                            currentFileIndex = 0;
+                        }
+                        playFile(files[currentFileIndex]);
+                    };
+                });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+        
+        audioInput.addEventListener('change', function() {
+            files = Array.from(this.files);
+            currentFileIndex = 0;
+            playlist.innerHTML = '';
+            files.forEach(function(file, index) {
+                var li = document.createElement('li');
+                li.textContent = file.name;
+                li.addEventListener('click', function() {
+                    currentFileIndex = index;
+                    playFile(files[currentFileIndex]);
+                });
+                playlist.appendChild(li);
+            });
+            playFile(files[currentFileIndex]);
+        });
+        
+        playPauseButton.addEventListener('click', function() {
+            if (isPlaying) {
+                audioContext.suspend();
+                playPauseButton.textContent = 'Play';
+                isPlaying = false;
+            } else {
+                audioContext.resume();
+                playPauseButton.textContent = 'Pause';
+                isPlaying = true;
+            }
+        });
+        
+        deleteButton.addEventListener('click', function() {
+            if (source) {
+                source.stop();
+                source.disconnect();
+                source = null;
+                files.splice(currentFileIndex, 1);
+                if (currentFileIndex >= files.length) {
+                    currentFileIndex = 0;
+                }
+                if (files.length > 0) {
+                    playFile(files[currentFileIndex]);
+                }
+                playlist.removeChild(playlist.childNodes[currentFileIndex]);
+                isPlaying = false;
+                playPauseButton.textContent = 'Play';
+            }
+        });
+        
+        function draw1() {
+            requestAnimationFrame(draw1);
+            var freqData = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(freqData);
+            var sum = 0;
+            for (var i = 0; i < freqData.length; i++) {
+                sum += freqData[i];
+            }
+            var average = sum / freqData.length;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+            
+
+            /*
+            //center
+            canvasContext.beginPath();
+            canvasContext.moveTo(0, canvas.height / 2);
+            canvasContext.lineTo(canvas.width, canvas.height / 2);
+            canvasContext.lineWidth = average / 2;
+            canvasContext.strokeStyle = 'hsl(' + average + ', 100%, 50%)';
+            canvasContext.stroke();
+            */
+
+            var sum1 = 0;
+            for (var i = 0; i < freqData.length; i++) {
+                sum1 += freqData[i];
+                sum1 += freqData[i];
+            }
+            var average1 = sum1 / freqData.length;
+
+            // left
+            canvasContext.beginPath();
+            canvasContext.moveTo(canvas.width, 0);
+            canvasContext.lineTo(canvas.width, canvas.height);
+            canvasContext.lineWidth = average1 / 5;
+            canvasContext.strokeStyle = 'hsl(' + average1 + ', 100%, 50%)';
+            canvasContext.stroke();
+            // right
+            canvasContext.beginPath();
+            canvasContext.moveTo(0, 0);
+            canvasContext.lineTo(0  , canvas.height);
+            canvasContext.lineWidth = average1 / 5;
+            canvasContext.strokeStyle = 'hsl(' + average1 + ', 100%, 50%)';
+            canvasContext.stroke();
+            //
+            var sum2 = 0;
+            for (var i = 0; i < freqData.length; i++) {
+                sum2 += freqData[i];
+                sum2 += freqData[i];
+            }
+            var average2 = sum2 / freqData.length;
+            //down
+              canvasContext.beginPath();
+              canvasContext.moveTo(0, canvas.height /1.0035);
+              canvasContext.lineTo(canvas.width, canvas.height /1.0035 );
+              canvasContext.lineWidth = average2 /5;
+              canvasContext.strokeStyle = 'hsl(' + average2 + ', 100%, 50%)';
+              canvasContext.stroke();
+            //up
+            canvasContext.beginPath();
+              canvasContext.moveTo(0, canvas.height / 150);
+              canvasContext.lineTo(canvas.width, canvas.height / 150);
+              canvasContext.lineWidth = average2 /5;
+              canvasContext.strokeStyle = 'hsl(' + average2 + ', 100%, 50%)';
+              canvasContext.stroke();
+              //circle
+              var gradient = canvasContext.createRadialGradient(canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, average);
+              gradient.addColorStop(0, 'white');
+              gradient.addColorStop(1, 'hsl(' + average + ', 100%, 50%)');
+
+              canvasContext.beginPath();
+              canvasContext.arc(canvas.width / 2, canvas.height / 2, average *2, 0, 2 * Math.PI);
+              canvasContext.fillStyle = 'hsl(' + average + ', 100%, 50%)';
+              canvasContext.fill();
+            //
+            
+
+        }
+        draw1();
+// Set up the animation loop
+let hue = 0;
+let lightness = 0;
+function draw() {
+  // Get the frequency data from the analyser
+  const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(frequencyData);
+
+  // Calculate the average frequency
+  let sum = 0;
+  for (let i = 0; i < frequencyData.length; i++) {
+    sum += frequencyData[i];
+  }
+  const averageFrequency = sum / frequencyData.length * 1.5;
+
+  // Map the average frequency to a hue value
+  const targetHue = Math.round(averageFrequency / 255 * 360);
+
+  // Map the average frequency to a lightness value
+  const targetLightness = Math.round(averageFrequency / 255 * 100);
+
+  // Interpolate between the current and target hue and lightness values
+  hue += (targetHue - hue) * 0.07;
+  lightness += (targetLightness - lightness) * 0.0025;
+
+  // Set the background color of the body element
+  document.body.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
+
+  // Request the next animation frame
+  requestAnimationFrame(draw);
+}
+
+// Start the animation loop
+// Create a new MediaStreamAudioDestinationNode
+const destination = audioContext.createMediaStreamDestination();
+const audioSource = audioContext.createMediaStreamSource(destination.stream);
+
+// Connect the destination to the analyser
+analyser.connect(destination);
+
+// Start the animation loop
+draw();
+
+
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const cursor = document.createElement('div');
+                cursor.id = 'cursor';
+                document.body.appendChild(cursor);
+            
+                let timeoutId;
+            
+                const resetCursorTimeout = () => {
+                cursor.style.opacity = '1'; // Show the cursor
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                timeoutId = setTimeout(() => {
+                    cursor.style.opacity = '0'; // Hide the cursor
+                }, 3000); // 3 seconds
+                };
+            
+                document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.pageX}px`;
+                cursor.style.top = `${e.pageY}px`;
+                resetCursorTimeout();
+                });
+
+            const interactableClasses = ['interactable', 'toggle', 'btn', 'game', 'mail', 'email-link'];
+
+            interactableClasses.forEach(className => {
+                const elements = document.querySelectorAll(`.${className}`);
+
+                elements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursor.classList.add('interacting');
+                    });
+
+                    element.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('interacting');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

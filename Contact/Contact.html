@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/Contact/Contact.css">
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/Main.html" style="cursor: none;" class="interactable">Home</a></li>
+                <li><a href="/aboutme/me.html" style="cursor: none;" class="interactable">About</a></li>
+                <li><a href="/project/project.html" style="cursor: none;" class="interactable">Projects</a></li>
+                <li><a href="/application/app.html" style="cursor: none;" class="interactable">Applications</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="contact-container">
+            <section class="contact-info">
+                <h1>Get in Touch</h1>
+                <p>We'd love to hear from you! Whether you have a question, comment, or just want to say hello, please don't hesitate to reach out.</p>
+
+                </p>
+                <ul>
+                    <li>
+                        <i class="bx bx-map"></i>
+                        <span>Ho Chi Minh, Viet Nam</span>
+                    </li>
+                    <br>
+                    <li>
+                        <i class="bx bx-envelope"></i>
+                        <span><a href="mailto:trinhthihong159@gmail.com" class="email-link" style="cursor: none;">Contact Me</a></span>
+                    </li>
+                </ul>
+            </section>
+            <section class="contact-form">
+                <h2 style="font-size: 24px;">Send Us a Message</h2>
+                <form>
+                    <label for="name" style="cursor: none;">Name:</label>
+                    <input type="text" id="name" name="name" class="interactable" style="cursor: none;"><br><br>
+                    <label for="email" style="cursor: none;">Email:</label>
+                    <input type="email" id="email" name="email" class="interactable" style="cursor: none;"><br><br>
+                    <label for="message" style="cursor: none;">Message:</label>
+                    <textarea id="message" name="message" class="interactable" style="cursor: none;"></textarea><br><br><br><br>
+                    <input type="submit" class="mail" value="Send" onclick="sendEmail()" style="cursor: none;">
+                    <h6></h6>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy;2024 Than Pahm.</p>
+    </footer>
+    <script>
+        function sendEmail() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+            var subject = "Message from Website";
+            var body = "Name: " + name + "\nEmail: " + email + "\nMessage: " + message;
+            var mailtoLink = "mailto:trinhthihong159@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            window.location.href = mailtoLink;
+        }
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.createElement('div');
+    cursor.id = 'cursor';
+    document.body.appendChild(cursor);
+  
+    let timeoutId;
+  
+    const resetCursorTimeout = () => {
+      cursor.style.opacity = '1'; // Show the cursor
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        cursor.style.opacity = '0'; // Hide the cursor
+      }, 3000); // 3 seconds
+    };
+  
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.pageX}px`;
+      cursor.style.top = `${e.pageY}px`;
+      resetCursorTimeout();
+    });
+
+    const interactableClasses = ['interactable', 'toggle', 'btn', 'game', 'mail', 'email-link'];
+
+    interactableClasses.forEach(className => {
+        const elements = document.querySelectorAll(`.${className}`);
+
+        elements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('interacting');
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('interacting');
+            });
+        });
+    });
+});
+    </script>
+</body>
+</html>
