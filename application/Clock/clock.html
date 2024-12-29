@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="stylesheet" href="clock.css">
+
+
+    <style>
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .game {
+            width: 25%;
+            text-align: center;
+        }
+        .game :hover {
+            transform: scale(1.2);
+            cursor: none;
+        }
+    </style>
+</head>
+<body>
+    <div class ="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+
+    <div class="game">
+        <h3 onclick ="index()" style="margin-top: 200%; font-size: 50px; color: azure; font-family: Bebas Neue; cursor: none;" >hello :]</h3>
+    </div>
+
+    <script type="text/javascript">
+        const deg = 6;
+        const hr = document.querySelector('#hr');
+        const mn = document.querySelector('#mn');
+        const sc = document.querySelector('#sc');
+
+        setInterval(() =>{
+            let day = new Date()
+            let hh = day.getHours() * 30;;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+
+            hr.style.transform =`rotateZ(${(hh) +(mm/12)}deg)`;
+            mn.style.transform =`rotateZ(${mm}deg)`;
+            sc.style.transform =`rotateZ(${ss}deg)`;
+
+        })
+        function index() {
+            window.location.href = "../../Main.html";
+        }
+        
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.createElement('div');
+    cursor.id = 'cursor';
+    document.body.appendChild(cursor);
+  
+    let timeoutId;
+  
+    const resetCursorTimeout = () => {
+      cursor.style.opacity = '1'; // Show the cursor
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        cursor.style.opacity = '0'; // Hide the cursor
+      }, 3000); // 3 seconds
+    };
+  
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.pageX}px`;
+      cursor.style.top = `${e.pageY}px`;
+      resetCursorTimeout();
+    });
+
+  const interactableClasses = ['btn-number', 'btn-operator', 'theme-toggler', 'btn-equal', 'game'];
+
+  interactableClasses.forEach(className => {
+      const elements = document.querySelectorAll(`.${className}`);
+
+      elements.forEach(element => {
+          element.addEventListener('mouseenter', () => {
+              cursor.classList.add('interacting');
+          });
+
+          element.addEventListener('mouseleave', () => {
+              cursor.classList.remove('interacting');
+          });
+      });
+  });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="de.css">
+    <title>:D</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Encrypt What?</h1>
+        <label for="message">Message :</label>
+        <textarea id="message" rows="5"
+            cols="50" class="interactable"></textarea>
+        <label for="key" >Key :</label>
+        <input type="text" id="key" value="" size="50" class="interactable">
+        <div class="buttons">
+            <button id="enc-btn" class="interactable">Encrypt</button>
+            <button id="dec-btn" class="interactable">Decrypt</button>
+        </div>
+
+        <h2>Result:</h2>
+        <div id="result" style="border-radius: 10px;"></div>
+
+    </div>
+    <video autoplay muted loop>
+        <source src="torii-sunset-moewalls-com.mp4" type="video/mp4">
+    </video>
+
+    <div id="navArea">
+        <nav class="net">
+          <div class="inner">
+            <ul>
+              <li><a onclick href="/Main.html" style="cursor: none;" class="interactable">Home</a></li>
+              <li><a onclick href="/aboutme/me.html" style="cursor: none;" class="interactable">About Me</a></li>
+              <li><a onclick href="/application/app.html" style="cursor: none;" class="interactable">My Applications</a></li>
+              <li><a onclick href="/Contact/Contact.html" style="cursor: none;" class="interactable">Contact</a></li>
+              <p>&copy;2024 Than Pahm.</p>
+            </ul>
+          </div>
+        </nav>
+    
+        <div class="toggle-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    
+    <div id="mask"></div>
+
+
+    <script src="de.js"></script>
+</body>
+
+</html>

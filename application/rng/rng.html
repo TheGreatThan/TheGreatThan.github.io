@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNG Game</title>
+    <link rel="stylesheet" href="rng.css">
+</head>
+<body>
+    <div class="container">
+        <h1>RNG Game</h1>
+        <button id="pull-button" class="interactable">Pull</button>
+        <div id="roll-display"></div>
+        <div id="congrats-message" class="hidden"></div>
+        <button id="claim-button" class="hidden">Press to Claim</button>
+        <button id="inventory-button" class="interactable">Inventory</button>
+        <div class="inventory-count">Inventory: 0</div>
+        <div class="inventory-details"></div>       
+        <div id="inventory" class="hidden"></div>
+    </div>
+
+    <div id="navArea">
+        <nav class="net">
+          <div class="inner">
+            <ul>
+              <li><a onclick href="/Main.html" style="cursor: none;" class="interactable">Home</a></li>
+              <li><a onclick href="/aboutme/me.html" style="cursor: none;" class="interactable">About Me</a></li>
+              <li><a onclick href="/application/app.html" style="cursor: none;" class="interactable">My Applications</a></li>
+              <li><a onclick href="/Contact/Contact.html" style="cursor: none;" class="interactable">Contact</a></li>
+              <p>&copy;2024 Than Pahm.</p>
+            </ul>
+          </div>
+        </nav>
+    
+        <div class="toggle-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    
+        <div id="mask"></div>
+        <script src="rng.js"></script> 
+</body>
+</html>

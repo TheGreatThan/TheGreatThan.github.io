@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <meta name ="moneytization" content="$ilp.uphold.com/WUdKN2pAgLAG"/><link rel="stylesheet" href="app.css">
+      <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="return">
+    <a href="/Main.html" style="text-decoration: none; color: rgb(163, 17, 17); font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 24px; text-align: right; margin-left: 3%; margin-top: 10%;">X</a>
+</div>
+
+<div class="game-container">
+    <div class="game">
+        <a href="./calculator/cal.html" style="cursor: none;"><img src="/application/gamepics/cal.png" alt="Calculator" style="cursor: none;"></a>
+        <h3 onclick ="cal()" style="cursor: none; font-family: Barlow,sans-serif; font-size: 150%;" >Than's Super Cool Calculator</h3>
+        <p style="font-family: Barlow,sans-serif;">The second project I made.</p>
+    </div>
+    <div class="game">
+        <a href="/application/Clock/clock.html" style="cursor: none;"><img src="/application/gamepics/clock.jpg" alt="Clock" style="cursor: none;"></a>
+        <h3 onclick="clock()" style="cursor: none; font-family: Barlow,sans-serif; font-size: 150%;">Than's Ultimate Clock Pro Max</h3>
+        <p style="font-family: Barlow,sans-serif;">HOLLY SHIT ITS A CLOCK :O</p>
+    </div>
+    <div class="game">
+        <a href="rng/rng.html"><img src="/application/gamepics/RNG_WC.webp" alt="RNG GAME" style="cursor: none;"></a>
+        <h3 onclick="paint()" style="cursor: none; font-family: Barlow,sans-serif; font-size: 150%;">A 'super high quality' rng game</h3>
+        <p style="font-family: Barlow,sans-serif;">Very high quality</p>
+    </div>
+    <div class="game">
+        <a href="/application/Deen/de.html"><img src="/application/gamepics/ieatsgit.jpg" alt="DecoderStuffs" style="cursor: none;"></a>
+        <h3 onclick="pixel()" style="cursor: none; font-family: Barlow,sans-serif; font-size: 150%;">Ultimate De-Encoder</h3>
+        <p style="font-family: Barlow,sans-serif;">Send your friends encoded messages to make them curious.</p>
+    </div>
+    <div class="game">
+        <a href="/application/Calender/clder.html"><img src="/application/gamepics/normalblank.jpg" alt="Sudoku" style="cursor: none;"></a>
+        <h3 onclick="cals()" style="cursor: none; font-family: Barlow,sans-serif; font-size: 150%;">Ultimate Sudoku Solver</h3>
+        <p style="font-family: Barlow,sans-serif;">Its still unstable. May set your computer on fire.</p>
+    </div>
+</div>
+    <script>
+        function cal() {
+          window.location.href ="./calculator/cal.html";
+        }
+        function paint() {
+            window.location.href="./rng/rng.html";
+        }
+        function pixel() {
+            window.location.href="./Deen/de.html";
+        }
+        function clock() {
+            window.location.href="./Clock/clock.html"
+        }
+        function cals() {
+            window.location.href="./Calender/clder.html"
+        }
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.createElement('div');
+    cursor.id = 'cursor';
+    document.body.appendChild(cursor);
+  
+    let timeoutId;
+  
+    const resetCursorTimeout = () => {
+      cursor.style.opacity = '1'; // Show the cursor
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        cursor.style.opacity = '0'; // Hide the cursor
+      }, 3000); // 3 seconds
+    };
+  
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.pageX}px`;
+      cursor.style.top = `${e.pageY}px`;
+      resetCursorTimeout();
+    });
+
+    const interactableClasses = ['interactable', 'toggle', 'btn', 'game', 'return'];
+
+    interactableClasses.forEach(className => {
+        const elements = document.querySelectorAll(`.${className}`);
+
+        elements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('interacting');
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('interacting');
+            });
+        });
+    });
+});
+
+    </script>
+</body>
+</html>
