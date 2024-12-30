@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Visualizer</title>
+</head>
+<body>
+    <audio></audio>
+    <div class="box">
+        <div class="visualizer"></div>
+    </div>
+    <div class="play">
+        <div class="btn btn-play"></div>
+    </div>
+    <div class="file-upload">
+        <input type="file" id="file-input" accept="audio/*">
+    </div>
+    <div class="interactable" style="position: righ; color: red; font-weight: 800;">
+        <a onclick href="../../Main.html">"miss me?"</a>
+    </div>
+    <script>
+        const btn = document.querySelector('.btn');
+        const audio = document.querySelector('audio');
+        const visualizer = document.querySelector('.visualizer');
+        const fileInput = document.querySelector('#file-input');
+
+        let audioContext, analyser, source;
+
+        let hue = 0;
+        let lightness = 0;
+
+        const initializeAudioContext = () => {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 64;
+            }
+        };
+
+        const setupAudioSource = () => {
+            if (source) {
+                source.disconnect();
+            }
+            source = audioContext.createMediaElementSource(audio);
+            source.connect(analyser);
+            source.connect(audioContext.destination);
+        };
+
+        const createVisualizer = () => {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            const elements = [];
+            visualizer.innerHTML = ''; // Clear previous elements
+
+            for (let i = 0; i < bufferLength; i++) {
+                const element = document.createElement('span');
+                element.classList.add('element');
+                elements.push(element);
+                visualizer.appendChild(element);
+            }
+
+            const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+            const update = () => {
+                requestAnimationFrame(update);
+                analyser.getByteFrequencyData(dataArray);
+                for (let i = 0; i < bufferLength; i++) {
+                    let item = dataArray[i];
+                    item = item > 150 ? item / 1.5 : item * 1.5;
+                    elements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${clamp(item, 100, 150)}px)`;
+                }
+            };
+            update();
+        };
+
+        const draw1 = () => {
+            const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(frequencyData);
+
+            // Calculate the average frequency
+            let sum = 0;
+            for (let i = 0; i < frequencyData.length; i++) {
+                sum += frequencyData[i];
+            }
+            const averageFrequency = sum / frequencyData.length;
+
+            // Map the average frequency to a hue value
+            const targetHue = Math.round(averageFrequency / 255 * 360);
+
+            // Map the average frequency to a lightness value
+            const targetLightness = Math.round(averageFrequency / 255 * 100);
+
+            // Interpolate between the current and target hue and lightness values
+            hue += (targetHue - hue) * 0.00025;
+            lightness += (targetLightness - lightness) * 0.0025;
+
+            // Set the background color of the body element
+            document.body.style.backgroundColor = `hsl(${hue}, 85%, ${lightness}%)`;
+
+            // Request the next animation frame
+            requestAnimationFrame(draw1);
+        };
+
+        btn.addEventListener('click', () => {
+            initializeAudioContext();
+
+            if (audio.src) {
+                if (audio.paused) {
+                    audioContext.resume();
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                btn.classList.toggle('btn-play');
+                btn.classList.toggle('btn-pause');
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                audio.src = fileURL;
+                audio.load();
+                initializeAudioContext();
+                setupAudioSource();
+                createVisualizer();
+                draw1(); // Start the background animation loop
+
+                btn.classList.remove('btn-pause');
+                btn.classList.add('btn-play');
+                audio.pause();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+  const cursor = document.createElement('div');
+  cursor.id = 'cursor';
+  document.body.appendChild(cursor);
+
+  let timeoutId;
+
+  const resetCursorTimeout = () => {
+    cursor.style.opacity = '1'; // Show the cursor
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      cursor.style.opacity = '0'; // Hide the cursor
+    }, 3000); // 3 seconds
+  };
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = `${e.pageX}px`;
+    cursor.style.top = `${e.pageY}px`;
+    resetCursorTimeout();
+  });
+
+  const interactableClasses = ['interactable', 'toggle-btn', 'play', 'btn-pause', 'file-upload'];
+
+  interactableClasses.forEach(className => {
+      const elements = document.querySelectorAll(`.${className}`);
+
+      elements.forEach(element => {
+          element.addEventListener('mouseenter', () => {
+              cursor.classList.add('interacting');
+          });
+
+          element.addEventListener('mouseleave', () => {
+              cursor.classList.remove('interacting');
+          });
+      });
+  });
+});
+    </script>
+</body>
+</html>
