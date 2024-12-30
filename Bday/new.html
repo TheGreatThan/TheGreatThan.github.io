@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖Tạp Chí Sinh Nhật 🎂</title>
+    <link rel="stylesheet" href="news.css">
+</head>
+<body>
+    <audio id="myAudio" src="Audio1.mp3" preload="auto"></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('myAudio');
+            audio.play().catch(function(error) {
+                console.log('Autoplay was prevented:', error);
+            });
+        });
+    </script>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Happy Birthday 🎉</h1>
+            <p>Một ngày đặc biệt cho một người đặc biệt!</p>
+        </div>
+
+        <div class="content">
+            <h2>Mẹ ơi,</h2>
+            <p>Con cảm ơn mẹ vì tất cả những điều vĩ đại mẹ đã hi sinh cho con, con biết mẹ đã vất vả rất nhiều <br> và trong năm qua cũng có nhiều điều không vui đã xảy ra. <br>nhưng con biết rằng mẹ rồi sẽ vượt qua được những điều đó!!! <br>những điều tồi tệ đã trải qua sẽ nhanh biến mất.</p>
+            <p>Dù có chuyện gì xảy ra đi nữa, thì con vẫn sẽ luôn ủng hộ mẹ!!! <br> Hôm nay, nhân dịp 1 ngày đặc biệt.</p> 
+            <p><b>Chính là ngày đặc biệt của mẹ. Ngày mà mẹ đã được sinh ra đời.</b></p>
+            <p>Con chúc mẹ một ngày <b>sinh nhật tuyệt vời</b>, con mong mẹ luôn <b>vui vẻ</b> và <b>hãy nhớ giữ gìn sức khỏe nhé mẹ!</b></p>
+            <button id="surpriseButton">~ Hãy nhấn vào đây ~</button>
+        </div>
+
+        <div id="surpriseSection" class="hidden">
+            <div class="balloons">
+                    <img src="img/photo1.jpg" alt="Birthday 1">
+                    <img src="img/photo2.jpg" alt="Birthday 2">
+                    <img src="img/photo3.jpg" alt="Birthday 3">
+                    <img src="img/photo4.jpg" alt="Birthday 4">
+                    <img src="img/photo7.jpg" alt="Birthday 5">
+                    <img src="img/photo8.jpg" alt="Birthday 1">
+                    <img src="img/photo9.jpg" alt="Birthday 2">
+                    <img src="img/photo10.jpg" alt="Birthday 3">
+                    <img src="img/photo11.jpg" alt="Birthday 4">
+                </div>
+            <h2>🎂 Con chúc mẹ luôn xinh đẹp! 🎂</h2>
+            <p>và ngày càng đạt được nhiều thành công trong công việc!</p>
+        </div>
+
+        <canvas id="confettiCanvas"></canvas>
+    </div>
+
+    <script src="news.js"></script>
+</body>
+</html>

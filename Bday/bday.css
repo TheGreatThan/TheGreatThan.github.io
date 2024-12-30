@@ -1,0 +1,134 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe6e6;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  h1, h2 {
+    color: #ff4d4d;
+  }
+  
+  section {
+    padding: 50px;
+    text-align: center;
+    transition: opacity 0.5s, display 0.5s;
+  }
+  
+  .hidden {
+    opacity: 0;
+    display: none;
+  }
+  
+  #home {
+    height: 100vh;
+    background-color: #ff9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .banner {
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #ff3333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e60000;
+  }
+  
+  /* Sudoku Styles */
+  #sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 50px); /* For 8x8 grid */
+    grid-gap: 5px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  #sudoku-grid input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid #ff3333;
+    background-color: #fff;
+  }
+  
+  #solveMessage, #errorMessage {
+    margin-top: 20px;
+    font-size: 18px;
+    color: green;
+  }
+  
+  #errorMessage {
+    color: red;
+  }
+  
+/* TikTok Section */
+.video-feed {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+  
+  .video {
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100%;
+    background-color: #ff8080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    transition: transform 0.5s ease;
+    position: relative;
+  }
+  
+  .message {
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    padding-top: 40vh; /* Center the message vertically */
+  }
+  
+  
+  #news {
+    margin-top: 50px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* News Section */
+  .article {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ff3333;
+    border-radius: 10px;
+  }
+  
+  #hiddenGallery {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ff3333;
+    display: none;
+  }
+
+  
+  
