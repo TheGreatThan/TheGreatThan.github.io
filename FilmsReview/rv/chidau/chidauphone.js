@@ -1,9 +1,9 @@
 function checkWindowSize() {
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
-    if (windowWidth > 1350 || windowHeight > 600) {
+    if (windowWidth < 1350 || windowHeight < 600) {
     }else{
-        window.location.href = "./chidauphone.html";
+        window.location.href = "./chidau.html";
     }
 }
 
@@ -26,7 +26,7 @@ window.addEventListener('scroll', () => {
     const scrollTitle = document.querySelector('.scroll-title');
     if (window.scrollY > 50) { // Adjust scroll threshold as needed
         scrollTitle.style.opacity = '1';
-        scrollTitle.style.fontSize = '50px'; // Original font size when hidden
+        scrollTitle.style.fontSize = '30px'; // Original font size when hidden
     } else {
         scrollTitle.style.opacity = '0';
         scrollTitle.style.fontSize = '0'; // Original font size when hidden
