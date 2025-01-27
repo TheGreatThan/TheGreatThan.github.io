@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Reviews</title>
+  <link rel="stylesheet" href="fiml.css">
+</head>
+<body>
+  <header>
+    <h1>Than's Thought About This Movie/Book</h1>
+  </header>
+
+  <div class="container">
+    <div class="search-bar">
+      <input id="search-input" type="text" placeholder="What's in your mind?" class="interactable">
+    </div>
+
+    <div id="movie-grid" class="movie-grid">
+      <!-- Movie cards will be inserted here by JavaScript -->
+    </div>
+
+    <div id="no-results" class="hidden">
+      <p>Hey, this idiot hasn't watched this movie/book yet. Send him some suggestions!</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Than Pahm.</p>
+  </footer>
+
+  <div id="navArea">
+    <nav>
+      <div class="inner">
+        <ul>
+          <li><a onclick href="aboutme/therealaboutme.html" style="cursor: none;" class="interactable">About Me</a></li>
+          <li><a onclick href="/application/app.html" style="cursor: none;" class="interactable">My Applications</a></li>
+          <li><a onclick href="/project/project.html" style="cursor: none;" class="interactable">My Project</a></li>
+          <li><a onclick href="/Contact/Contact.html" style="cursor: none;" class="interactable">Contact</a></li>
+          <li><a onclick href="/books/book.html" style="cursor: none;" class="interactable">Library</a></li>
+          <li><a onclick href="#" style="cursor: none;" class="interactable">University</a></li>
+          <p>&copy;2024 Than Pahm.</p>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="toggle-btn">
+      <span class="interactable"></span>
+      <span class="interactable"></span>
+      <span class="interactable"></span>
+    </div>
+
+    <div id="mask"></div>
+  </div>
+
+  <script src="film.js"></script>
+</body>
