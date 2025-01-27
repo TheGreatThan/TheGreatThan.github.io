@@ -6,7 +6,7 @@ const movies = [
       genre: "Drama, Comedy",
       rating: 4,
       image: "/FilmsReview/pic/chidau.jpg",
-      link: "/FilmsReview/rv/chidau/chidau.html",
+      link: "/FilmsReview/rv/chidau/chidauphone.html",
     },
     { 
       name: "Howl's Moving Castle",
