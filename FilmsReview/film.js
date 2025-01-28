@@ -71,7 +71,7 @@ const movies = [
   renderMovies(movies);
   
 
-  let nav = document.querySelector("#navArea");
+let nav = document.querySelector("#navArea");
 let btn = document.querySelector(".toggle-btn");
 let mask = document.querySelector("#mask");
 
