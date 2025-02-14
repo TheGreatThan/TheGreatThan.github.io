@@ -1,7 +1,7 @@
 function checkWindowSize() {
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
-    if (windowWidth > 1350 || windowHeight > 600) {
+    if (windowWidth <= 1350 || windowHeight <= 600) {
     }else{
         window.location.href = "./denamhon.html";
     }
