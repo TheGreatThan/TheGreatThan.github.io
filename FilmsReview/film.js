@@ -9,7 +9,7 @@ const movies = [
       link: "/FilmsReview/rv/chidau/chidauphone.html",
     },
     { 
-      name: "Đèn Âm Hồn",
+      name: "Đèn Âm Hồn - Den Am Hon",
       director: "Hoàng Nam",
       release: 2025,
       genre: "horror",
