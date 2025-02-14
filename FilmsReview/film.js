@@ -9,13 +9,13 @@ const movies = [
       link: "/FilmsReview/rv/chidau/chidauphone.html",
     },
     { 
-      name: "Howl's Moving Castle",
-      director: "Hayao Miyazaki",
-      release: 2004,
-      genre: "Anime",
-      rating: 4,
-      image: "/FilmsReview/pic/howls.jpg",
-      link: "https://www.imdb.com/title/tt1375666/",
+      name: "Đèn Âm Hồn",
+      director: "Hoàng Nam",
+      release: 2025,
+      genre: "horror",
+      rating: 3,
+      image: "/FilmsReview/pic/denamhon.webp",
+      link: "/FilmsReview/rv/denamhon/denamhonphone.html",
     },
   ];
   
